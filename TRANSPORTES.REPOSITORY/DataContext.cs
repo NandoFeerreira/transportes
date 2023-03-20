@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TRANSPORTES.REPOSITORY.Models.Entidades;
 
 namespace TRANSPORTES.REPOSITORY
 {
@@ -11,8 +12,7 @@ namespace TRANSPORTES.REPOSITORY
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
-
-
+        public DbSet<EntidadeCliente> EntidadeClientes { get; set; }
 
     }
 }

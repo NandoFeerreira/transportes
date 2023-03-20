@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 namespace TRANSPORTES.REPOSITORY.Models.Entidades
 {
     public class EntidadeCliente : EntidadeBase
-    {
-       
+    {       
         public string  ClienteNome { get; set; }
 
         public string NumeroContainer { get; set; }
