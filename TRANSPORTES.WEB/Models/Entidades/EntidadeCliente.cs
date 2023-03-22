@@ -1,24 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
+using TRANSPORTES.WEB.Models.Entidades;
 
 namespace TRANSPORTES.REPOSITORY.Models.Entidades
 {
-    public class EntidadeCliente : EntidadeBase
-    {       
-        public string  ClienteNome { get; set; }
+    public class EntidadeCliente
+    {
+        [Key]
+        [Column(TypeName = "decimal(13,2)")]
+        public decimal ClienteId { get; set; }
 
-        public string NumeroContainer { get; set; }
+        [StringLength(256)]
+        public string ClienteNome { get; set; }
 
-        public decimal Tipo { get; set; }
+        public DateTime DataCriacao { get; set; }
 
-        public string Status { get; set; }
+        public bool Ativo { get; set; }
 
-        public string Categoria { get; set; }
+        public DateTime? DataAtualizacao { get; set; }  
+
+        public ICollection<Conteiner> Conteiners { get; set; }
 
     }
 }       

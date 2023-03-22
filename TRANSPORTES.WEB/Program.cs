@@ -1,6 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using TRANSPORTES.REPOSITORY;
 using TRANSPORTES.WEB.Context;
+using TRANSPORTES.WEB.Factorys;
+using TRANSPORTES.WEB.Factorys.Interfaces;
+using TRANSPORTES.WEB.Repositories;
+using TRANSPORTES.WEB.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +16,21 @@ var mySqlConnection = builder.Configuration.GetConnectionString("Conection");
 builder.Services.AddDbContext<AppDbContext>(options =>
 options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));
 
+#region [ INJEÇÃO DE DEPENDÊNCIA ] 
+
+#region [ REPOSITORIES ] 
+
+builder.Services.AddScoped<IEntidadeClienteRepository, EntidadeClienteRepository>();
+
+#endregion
+
+#region [ FACTORIES ]
+
+builder.Services.AddScoped<IEntidadeClienteFactory, EntidadeClienteFactory>();
+
+#endregion
+
+#endregion
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
