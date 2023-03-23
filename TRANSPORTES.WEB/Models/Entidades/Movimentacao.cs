@@ -7,8 +7,9 @@ namespace TRANSPORTES.WEB.Models.Entidades
     public class Movimentacao
     {
         [Key]
-        [Column(TypeName = "decimal(13,2)")]
-        public decimal MovimentacaoId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        
+        public int MovimentacaoId { get; set; }
 
         public DateTime DataCriacao { get; set; }
 
@@ -22,10 +23,9 @@ namespace TRANSPORTES.WEB.Models.Entidades
         public DateTime DataHoraInicio { get; set; }
 
         public DateTime DataHoraFim { get; set; }
+        
+        public int ConteinerId { get; set; }
 
-        [Column(TypeName = "decimal(13,2)")]
-        public decimal ConteinerId { get; set; }
-
-        public Conteiner Conteiner { get; set; }
+        
     }
 }

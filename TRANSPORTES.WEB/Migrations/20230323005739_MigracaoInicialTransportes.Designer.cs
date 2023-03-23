@@ -11,7 +11,7 @@ using TRANSPORTES.WEB.Context;
 namespace TRANSPORTES.WEB.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230322033100_MigracaoInicialTransportes")]
+    [Migration("20230323005739_MigracaoInicialTransportes")]
     partial class MigracaoInicialTransportes
     {
         /// <inheritdoc />
@@ -24,8 +24,9 @@ namespace TRANSPORTES.WEB.Migrations
 
             modelBuilder.Entity("TRANSPORTES.REPOSITORY.Models.Entidades.EntidadeCliente", b =>
                 {
-                    b.Property<decimal>("ClienteId")
-                        .HasColumnType("decimal(13,2)");
+                    b.Property<int>("ClienteId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("tinyint(1)");
@@ -38,7 +39,7 @@ namespace TRANSPORTES.WEB.Migrations
                     b.Property<DateTime?>("DataAtualizacao")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime>("DataCriacao")
+                    b.Property<DateTime?>("DataCriacao")
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("ClienteId");
@@ -48,8 +49,9 @@ namespace TRANSPORTES.WEB.Migrations
 
             modelBuilder.Entity("TRANSPORTES.WEB.Models.Entidades.Conteiner", b =>
                 {
-                    b.Property<decimal>("ConteinerId")
-                        .HasColumnType("decimal(13,2)");
+                    b.Property<int>("ConteinerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("tinyint(1)");
@@ -59,17 +61,14 @@ namespace TRANSPORTES.WEB.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
-                    b.Property<decimal>("ClienteId")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<int>("ClienteId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("DataAtualizacao")
                         .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("datetime(6)");
-
-                    b.Property<decimal>("EntidadeClienteClienteId")
-                        .HasColumnType("decimal(13,2)");
 
                     b.Property<string>("Numero")
                         .IsRequired()
@@ -81,26 +80,25 @@ namespace TRANSPORTES.WEB.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
-                    b.Property<decimal>("Tipo")
-                        .HasColumnType("decimal(13,2)");
+                    b.Property<int>("Tipo")
+                        .HasColumnType("int");
 
                     b.HasKey("ConteinerId");
-
-                    b.HasIndex("EntidadeClienteClienteId");
 
                     b.ToTable("Conteiners");
                 });
 
             modelBuilder.Entity("TRANSPORTES.WEB.Models.Entidades.Movimentacao", b =>
                 {
-                    b.Property<decimal>("MovimentacaoId")
-                        .HasColumnType("decimal(13,2)");
+                    b.Property<int>("MovimentacaoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<decimal>("ConteinerId")
-                        .HasColumnType("decimal(13,2)");
+                    b.Property<int>("ConteinerId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("DataAtualizacao")
                         .HasColumnType("datetime(6)");
@@ -121,41 +119,7 @@ namespace TRANSPORTES.WEB.Migrations
 
                     b.HasKey("MovimentacaoId");
 
-                    b.HasIndex("ConteinerId");
-
                     b.ToTable("Movimentacoes");
-                });
-
-            modelBuilder.Entity("TRANSPORTES.WEB.Models.Entidades.Conteiner", b =>
-                {
-                    b.HasOne("TRANSPORTES.REPOSITORY.Models.Entidades.EntidadeCliente", "EntidadeCliente")
-                        .WithMany("Conteiners")
-                        .HasForeignKey("EntidadeClienteClienteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("EntidadeCliente");
-                });
-
-            modelBuilder.Entity("TRANSPORTES.WEB.Models.Entidades.Movimentacao", b =>
-                {
-                    b.HasOne("TRANSPORTES.WEB.Models.Entidades.Conteiner", "Conteiner")
-                        .WithMany("Movimentacoes")
-                        .HasForeignKey("ConteinerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Conteiner");
-                });
-
-            modelBuilder.Entity("TRANSPORTES.REPOSITORY.Models.Entidades.EntidadeCliente", b =>
-                {
-                    b.Navigation("Conteiners");
-                });
-
-            modelBuilder.Entity("TRANSPORTES.WEB.Models.Entidades.Conteiner", b =>
-                {
-                    b.Navigation("Movimentacoes");
                 });
 #pragma warning restore 612, 618
         }

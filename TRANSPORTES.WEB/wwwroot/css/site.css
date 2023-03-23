@@ -20,3 +20,9 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.dropdown-menu-custom {
+    min-width: 100%;
+    max-width: 100%;
+    width: 100%;
+}

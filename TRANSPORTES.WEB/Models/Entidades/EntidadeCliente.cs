@@ -8,19 +8,17 @@ namespace TRANSPORTES.REPOSITORY.Models.Entidades
     public class EntidadeCliente
     {
         [Key]
-        [Column(TypeName = "decimal(13,2)")]
-        public decimal ClienteId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]        
+        public int ClienteId { get; set; }
 
         [StringLength(256)]
         public string ClienteNome { get; set; }
 
-        public DateTime DataCriacao { get; set; }
+        public DateTime? DataCriacao { get; set; }
 
         public bool Ativo { get; set; }
 
-        public DateTime? DataAtualizacao { get; set; }  
-
-        public ICollection<Conteiner> Conteiners { get; set; }
+        public DateTime? DataAtualizacao { get; set; }          
 
     }
 }       

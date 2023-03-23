@@ -16,11 +16,18 @@ var mySqlConnection = builder.Configuration.GetConnectionString("Conection");
 builder.Services.AddDbContext<AppDbContext>(options =>
 options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));
 
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+
 #region [ INJEÇÃO DE DEPENDÊNCIA ] 
 
 #region [ REPOSITORIES ] 
 
 builder.Services.AddScoped<IEntidadeClienteRepository, EntidadeClienteRepository>();
+builder.Services.AddScoped<IConteinerRepository, ConteinerRepository>();
+builder.Services.AddScoped<IMovimentacaoRepository, MovimentacaoRepository>();
 
 #endregion
 
@@ -45,6 +52,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthorization();
 

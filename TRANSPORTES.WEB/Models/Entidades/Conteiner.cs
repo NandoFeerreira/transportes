@@ -8,10 +8,11 @@ namespace TRANSPORTES.WEB.Models.Entidades
     public class Conteiner
     {
         [Key]
-        [Column(TypeName = "decimal(13,2)")]
-        public decimal ConteinerId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+       
+        public int ConteinerId { get; set; }
 
-        public DateTime DataCriacao { get; set; }
+        public DateTime? DataCriacao { get; set; }
 
         public bool Ativo { get; set; }
 
@@ -19,9 +20,8 @@ namespace TRANSPORTES.WEB.Models.Entidades
 
         [StringLength(100)]
         public string Numero { get; set; }
-
-        [Column(TypeName = "decimal(13,2)")]
-        public decimal Tipo { get; set; }
+        
+        public int Tipo { get; set; }
 
         [StringLength(100)]
         public string Status { get; set; }
@@ -29,10 +29,7 @@ namespace TRANSPORTES.WEB.Models.Entidades
         [StringLength(100)]
         public string Categoria { get; set; }
 
-        public decimal ClienteId { get; set; }
-
-        public EntidadeCliente EntidadeCliente { get; set; }
-
-        public ICollection<Movimentacao> Movimentacoes { get; set; }
+        public int ClienteId { get; set; }
+        
     }
 }

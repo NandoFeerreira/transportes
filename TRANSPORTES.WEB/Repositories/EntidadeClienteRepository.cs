@@ -18,24 +18,24 @@ public class EntidadeClienteRepository : IEntidadeClienteRepository
         return _context.EntidadeClientes.ToList();
     }
 
-    public EntidadeCliente GetEntidadeCLienteById(decimal clienteId)
+    public EntidadeCliente GetEntidadeCLienteById(int clienteId)
     {
         return _context.EntidadeClientes.FirstOrDefault(Id => Id.ClienteId == clienteId);
     }
 
-    public bool AddEntidadeCliente(EntidadeCliente entidadeCliente)
+    public decimal AddEntidadeCliente(EntidadeCliente entidadeCliente)
     {
         try
         {
             _context.EntidadeClientes.Add(entidadeCliente);
             _context.SaveChanges();
 
-            return true;
+             return entidadeCliente.ClienteId; 
 
         }
-        catch (Exception)
+        catch (Exception )
         {
-            return false;
+            return 0;
         }
     }
 
@@ -66,7 +66,7 @@ public class EntidadeClienteRepository : IEntidadeClienteRepository
     }
 
 
-    public bool DeleteEntidadeCliente(decimal clienteId)
+    public bool DeleteEntidadeCliente(int clienteId)
     {
         try
         {

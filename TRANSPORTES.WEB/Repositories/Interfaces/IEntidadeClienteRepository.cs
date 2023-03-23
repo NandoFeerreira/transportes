@@ -7,11 +7,11 @@ public interface IEntidadeClienteRepository
 
     IEnumerable<EntidadeCliente> GetAllEntidadeClientes();
 
-    EntidadeCliente GetEntidadeCLienteById(decimal clienteId);
+    EntidadeCliente GetEntidadeCLienteById(int clienteId);
 
-    bool AddEntidadeCliente(EntidadeCliente entidadeCliente);
+    decimal AddEntidadeCliente(EntidadeCliente entidadeCliente);
 
     bool UpdateEntidadeCliente(EntidadeCliente entidadeCliente);
 
-    bool DeleteEntidadeCliente(decimal clienteId);
+    bool DeleteEntidadeCliente(int clienteId);
     }
