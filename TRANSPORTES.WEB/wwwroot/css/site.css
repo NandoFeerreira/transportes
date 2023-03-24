@@ -18,7 +18,8 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 100px;
+    margin-top: 60px;
 }
 
 .dropdown-menu-custom {
@@ -26,3 +27,17 @@ body {
     max-width: 100%;
     width: 100%;
 }
+
+footer {
+    text-align: center;
+    background: url("bg.jpg");
+    padding: 10px 0;
+}
+
+main {
+    min-height: calc(100vh - 130px); /* onde 130px é a altura do footer */
+}
+
+
+
+

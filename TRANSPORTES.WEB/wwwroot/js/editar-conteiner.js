@@ -4,7 +4,7 @@
 
         let clienteSelect = $('#cliente-nome').val();
 
-        let clienteSelecionado = model.find(cliente => cliente.clienteNome == clienteSelect);
+        let clienteSelecionado = model.find(cliente => cliente.clienteNome == clienteSelect);        
 
         $('#conteiner-numero').val(clienteSelecionado.numeroConteiner);
         $('#id-cliente').val(clienteSelecionado.clienteId);

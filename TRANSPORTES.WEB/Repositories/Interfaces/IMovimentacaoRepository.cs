@@ -6,7 +6,7 @@ public interface IMovimentacaoRepository
 {
     IEnumerable<Movimentacao> GetAllMovimentacoes();
 
-    Movimentacao GetMovimentacaoId(decimal movimentacaoId);
+    Movimentacao GetMovimentacaoId(string tipoMovimentacao);
 
     bool AddMovimentacao(Movimentacao movimentacao);
 

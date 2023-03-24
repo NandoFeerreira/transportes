@@ -24,7 +24,9 @@ namespace TRANSPORTES.WEB.ViewModels
         public bool? Ativo {  get; set; }        
 
         public int? MovimentacaoId { get; set; }
-        
+
+        public string MovimentacaoTipo { get; set; }
+        public List<MovimentacaoViewModel> Movimentacoes { get; set; }
         public MovimentacaoViewModel Movimentacao { get; set; }
 
     }

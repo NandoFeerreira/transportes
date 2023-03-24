@@ -18,9 +18,9 @@ namespace TRANSPORTES.WEB.Repositories
             return _context.Movimentacoes.ToList();
         }
 
-        public Movimentacao GetMovimentacaoId(decimal movimentacaoId)
+        public Movimentacao GetMovimentacaoId(string tipoMovimentacao)
         {
-            return _context.Movimentacoes.FirstOrDefault(Id => Id.MovimentacaoId == movimentacaoId);
+            return _context.Movimentacoes.FirstOrDefault(c => c.Tipo == tipoMovimentacao);
         }
 
         public bool AddMovimentacao(Movimentacao movimentacao)

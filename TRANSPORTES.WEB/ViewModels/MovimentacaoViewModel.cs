@@ -12,7 +12,5 @@
 
         public int? ConteinerIdMovimentacao { get; set; }
 
-
-
     }
 }

@@ -30,8 +30,6 @@ namespace TRANSPORTES.WEB.Controllers
 
             return View(listmodel);
 
-
-            return View();
         }
 
 
@@ -72,6 +70,32 @@ namespace TRANSPORTES.WEB.Controllers
                 var viewModel = _movimentacaoFactory.GetAllMovimentacoes();
 
                 return View(viewModel);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        [HttpPost]
+        [Route("movimentacao/editar")]
+        public IActionResult Editar(TransportesViewModel model)
+        {
+            try
+            {
+                var result = _movimentacaoFactory.UpdateMovimentacao(model);
+
+                if (result == true)
+                {
+                    return RedirectToAction("Editar", "Movimentacao");
+                }
+                else
+                {
+                    
+                }
+
+                return View();
             }
             catch (Exception)
             {

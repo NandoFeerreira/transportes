@@ -41,7 +41,7 @@ namespace TRANSPORTES.WEB.Factorys
 
                 var result = _conteinerRepository.AddConteiner(conteiner);
 
-                if (result = false)
+                if (result == false)
                 {
                     return false;
                 }

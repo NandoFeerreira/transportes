@@ -9,5 +9,7 @@ namespace TRANSPORTES.WEB.Factories.Interfaces
 
         List<TransportesViewModel> GetAllMovimentacoes();
 
+        bool UpdateMovimentacao(TransportesViewModel model);
+
     }
 }
