@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using TRANSPORTES.REPOSITORY;
 using TRANSPORTES.WEB.Context;
+using TRANSPORTES.WEB.Factories;
+using TRANSPORTES.WEB.Factories.Interfaces;
 using TRANSPORTES.WEB.Factorys;
 using TRANSPORTES.WEB.Factorys.Interfaces;
 using TRANSPORTES.WEB.Repositories;
@@ -34,6 +36,7 @@ builder.Services.AddScoped<IMovimentacaoRepository, MovimentacaoRepository>();
 #region [ FACTORIES ]
 
 builder.Services.AddScoped<IEntidadeClienteFactory, EntidadeClienteFactory>();
+builder.Services.AddScoped<IMovimentacaoFactory, MovimentacaoFactory>();
 
 #endregion
 

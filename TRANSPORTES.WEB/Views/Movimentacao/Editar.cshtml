@@ -1,0 +1,103 @@
+﻿@model List<TransportesViewModel>
+
+
+
+<div class="text-center">
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @ViewBag.Message
+        </div>
+    }
+    <h3>Adicionar Movimentação</h3>
+</div>
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body>
+    <form class="mx-auto" method="POST" action="/movimentacao">
+        <div class="form-row">
+            <div class="form-group col-md-8 mx-auto">
+                <label for="select-cliente">Cliente:</label>
+                <select class="form-control" id="select-cliente" name="ClienteNome">
+                    <option value="">Selecione o Cliente</option>
+                    @foreach (var cliente in Model)
+                    {
+                        <option value="@cliente.ClienteNome">@cliente.ClienteNome</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group col-md-8 mx-auto">
+                <label for="input-conteiner-numero">Nº do Container:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="input-conteiner-numero" name="NumeroConteiner" readonly>
+                    <input type="text" class="form-control" id="input-conteiner-id" name="ConteinerId" hidden>
+                </div>
+            </div>
+            <div class="form-group col-md-8 mx-auto">
+                <label for="select-tipo">Tipo:</label>
+                <select class="form-control" id="select-tipo" name="Tipo" disabled>
+                    <option value=""></option>
+                    <option value="20">20</option>
+                    <option value="40">40</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-8 mx-auto">
+                <label for="select-status">Status:</label>
+                <select class="form-control" id="select-status" name="Status" disabled>
+                    <option value=""></option>
+                    <option value="Cheio">Cheio</option>
+                    <option value="Vazio">Vazio</option>
+                </select>
+            </div>
+            <div class="form-group col-md-8 mx-auto">
+                <label for="select-categoria">Categoria:</label>
+                <select class="form-control" id="select-categoria" name="Categoria" disabled>
+                    <option value=""></option>
+                    <option value="Importação">Importação</option>
+                    <option value="Exportação">Exportação</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-8 mx-auto">
+                <label for="select-tipo-movimentacao">Tipo de Movimentação:</label>
+                <select class="form-control" id="select-tipo-movimentacao" name="Movimentacao.TipoMovimentacao">
+                    <option value="">Selecione o Tipo de Movimentação</option>
+                    <option value="embarque">Embarque</option>
+                    <option value="descarga">Descarga</option>
+                    <option value="gate-in">Gate In</option>
+                    <option value="gate-out">Gate Out</option>
+                    <option value="reposicionamento">Reposicionamento</option>
+                    <option value="pesagem">Pesagem</option>
+                    <option value="scanner">Scanner</option>
+                </select>
+            </div>
+            <div class="form-group row ">
+                <div class="col-md-4 " style="margin-left: 17%">
+                    <label for="input-data-hora-inicio">Data e Hora do Início:</label>
+                    <input type="datetime-local" class="form-control" id="input-data-hora-inicio" name="Movimentacao.DataHoraInicio">
+                </div>
+
+                <div class="col-md-4 ">
+                    <label for="input-data-hora-fim">Data e Hora do Fim:</label>
+                    <input type="datetime-local" class="form-control" id="input-data-hora-fim" name="Movimentacao.DataHoraFim">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="text-center">
+                <button type="submit" class="btn btn-success mt-2">Adicionar Movimentação</button>
+            </div>
+        </div>
+    </form>
+    <script>
+        var model = @Html.Raw(Json.Serialize(Model));
+    </script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/js/movimentacoes.js"></script>
+</body>
+

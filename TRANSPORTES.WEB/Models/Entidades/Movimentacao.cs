@@ -11,7 +11,7 @@ namespace TRANSPORTES.WEB.Models.Entidades
         
         public int MovimentacaoId { get; set; }
 
-        public DateTime DataCriacao { get; set; }
+        public DateTime? DataCriacao { get; set; }
 
         public bool Ativo { get; set; }
 

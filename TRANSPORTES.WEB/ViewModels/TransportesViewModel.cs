@@ -21,7 +21,11 @@ namespace TRANSPORTES.WEB.ViewModels
 
         public decimal? ConteinerId { get; set; }
 
-        public bool? Ativo {  get; set; }   
+        public bool? Ativo {  get; set; }        
+
+        public int? MovimentacaoId { get; set; }
+        
+        public MovimentacaoViewModel Movimentacao { get; set; }
 
     }
 }

@@ -47,9 +47,7 @@ namespace TRANSPORTES.WEB.Controllers
         {
             try
             {
-                var listmodel = _entidadeClienteFactory.GetListConteiners();
-
-                ViewBag.Mensagem = "";
+                var listmodel = _entidadeClienteFactory.GetListConteiners();                
 
                 return View(listmodel);
 
