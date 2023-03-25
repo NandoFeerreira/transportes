@@ -41,15 +41,23 @@
 
         let tipoMovimentacaoSelect = $('#select-tipo-movimentacao2').val();
 
-        let clienteSelecionado = model.find(cliente => cliente.clienteNome == clienteSelect);
+        if (tipoMovimentacaoSelect != "") {
 
-        let conteinerSelecionados = model.filter(conteiner => conteiner.movimentacoes.some(mov => mov.conteinerIdMovimentacao == clienteSelecionado.conteinerId));
+            let clienteSelecionado = model.find(cliente => cliente.clienteNome == clienteSelect);
 
-        let conteinerSelecionado = conteinerSelecionados.find(conteiner => conteiner.movimentacoes.some(mov => mov.tipoMovimentacao === tipoMovimentacaoSelect));
+            let conteinerSelecionados = model.filter(conteiner => conteiner.movimentacoes.some(mov => mov.conteinerIdMovimentacao == clienteSelecionado.conteinerId));
 
-        $('#select-tipo-movimentacao').val(conteinerSelecionado.movimentacoes.find(mov => mov.tipoMovimentacao === tipoMovimentacaoSelect).tipoMovimentacao)
-        $('#input-data-hora-inicio').val(conteinerSelecionado.movimentacoes.find(mov => mov.tipoMovimentacao === tipoMovimentacaoSelect).dataHoraInicio);
-        $('#input-data-hora-fim').val(conteinerSelecionado.movimentacoes.find(mov => mov.tipoMovimentacao === tipoMovimentacaoSelect).dataHoraFim);
+            let conteinerSelecionado = conteinerSelecionados.find(conteiner => conteiner.movimentacoes.some(mov => mov.tipoMovimentacao === tipoMovimentacaoSelect));
+
+            $('#select-tipo-movimentacao').val(conteinerSelecionado.movimentacoes.find(mov => mov.tipoMovimentacao === tipoMovimentacaoSelect).tipoMovimentacao)
+            $('#input-data-hora-inicio').val(conteinerSelecionado.movimentacoes.find(mov => mov.tipoMovimentacao === tipoMovimentacaoSelect).dataHoraInicio);
+            $('#input-data-hora-fim').val(conteinerSelecionado.movimentacoes.find(mov => mov.tipoMovimentacao === tipoMovimentacaoSelect).dataHoraFim);
+        } else {
+
+            $('#select-tipo-movimentacao').val("");
+            $('#input-data-hora-inicio').val("");
+            $('#input-data-hora-fim').val("");
+        }
 
     });
 

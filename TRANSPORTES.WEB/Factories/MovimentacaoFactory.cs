@@ -114,7 +114,29 @@ namespace TRANSPORTES.WEB.Factories
                 throw;
             }
 
+        }
 
+        public bool DeleteMovimentacao(TransportesViewModel model)
+        {
+            try
+            {
+                var movimentacao = _movimentacaoRepository.GetMovimentacaoId(model.MovimentacaoTipo);
+
+                var result = _movimentacaoRepository.DeleteMovimentacao(movimentacao.MovimentacaoId);
+
+                if (result == false)
+                {
+                    return false;
+                }
+
+                return true;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
 

@@ -11,5 +11,7 @@ namespace TRANSPORTES.WEB.Factories.Interfaces
 
         bool UpdateMovimentacao(TransportesViewModel model);
 
+        bool DeleteMovimentacao(TransportesViewModel model);
+
     }
 }

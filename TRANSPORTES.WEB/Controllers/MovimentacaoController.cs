@@ -104,5 +104,26 @@ namespace TRANSPORTES.WEB.Controllers
             }
         }
 
+
+        [HttpPost]
+        [Route("movimentacao/excluir")]
+        public IActionResult Excluir(TransportesViewModel model)
+        {
+            try
+            {
+                var result = _movimentacaoFactory.DeleteMovimentacao(model);
+
+                if(result == true) 
+                {
+                    return RedirectToAction("Editar", "Movimentacao");
+                };
+
+                return View();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
