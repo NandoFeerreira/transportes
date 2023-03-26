@@ -1,0 +1,145 @@
+﻿@model List<TransportesViewModel>;
+
+@section styles_site {
+    <link rel="stylesheet" type="text/css" href="/css/relatorio.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+}
+
+<form class="row g-3">
+
+    <strong><h3>Relatório de Movimentações</h3></strong></>
+
+    <div class="col-md-6">
+        <label for="tipo" class="form-label text-center">Tipo:</label>
+        <select id="tipo" name="tipo" class="form-select">
+            <option value="">Todos</option>
+            <option value="embarque">Embarque</option>
+            <option value="descarga">Descarga</option>
+            <option value="gatein">Gate In</option>
+            <option value="gateout">Gate Out</option>
+            <option value="reposicionamento">Reposicionamento</option>
+            <option value="pesagem">Pesagem</option>
+            <option value="scanner">Scanner</option>
+        </select>
+    </div>
+    <div class="col-md-6">
+        <label for="cliente" class="form-label text-center">Cliente:</label>
+        <select id="cliente" name="cliente" class="form-select">
+            <option value="">Todos</option>
+            @foreach (var c in Model.Select(m => m.ClienteNome).Distinct().OrderBy(c => c))
+            {
+                <option value="@c">@c</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-12">
+        <button type="submit" class="btn btn-primary">Filtrar</button>
+    </div>
+</form>
+<div class="table-responsive">
+    <table id="movimentacoes-table">
+        <thead>
+            <tr>
+                <th scope="col" class="text-center">Cliente</th>
+                <th scope="col" class="text-center">Tipo de Contêiner</th>
+                <th scope="col" class="text-center">Categoria</th>
+                <th scope="col" class="text-center">Status</th>
+                <th scope="col" class="text-center">Total de Movimentações</th>
+                <th scope="col" class="text-center">Movimentações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td scope="row" class="text-center">@item.ClienteNome</td>
+                    <td class="text-center">@item.Tipo</td>
+                    <td class="text-center">@item.Categoria</td>
+                    <td class="text-center">@item.Status</td>
+                    <td class="text-center">
+                        @{
+                            int contador = 0;
+                            foreach (var movimentacao in item.Movimentacoes)
+                            {
+                                if (movimentacao.ConteinerIdMovimentacao == item.ConteinerId)
+                                {
+                                    contador++;
+                                }
+                            }
+                            @contador
+                        }
+                    </td>
+                    <td class="text-center">
+                        <i class="fas fa-info-circle" data-container-id="@item.ConteinerId">
+
+                        </i>
+                    </td>
+
+                </tr>
+
+
+            }
+
+
+        </tbody>
+        @*<tfoot>
+            <tr>
+                <td colspan="2">Total de Importação:</td>
+                <td>@Model.Count(m => m.Categoria == "Importação")</td>
+            </tr>
+            <tr>
+                <td colspan="2">Total de Exportação:</td>
+                <td>@Model.Count(m => m.Categoria == "Exportação")</td>
+            </tr>
+        </tfoot>*@
+    </table>
+</div>
+
+<div class="modal fade" id="movimentacoesModal" tabindex="-1" aria-labelledby="movimentacoesModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="movimentacoesModalLabel">Movimentações do Contêiner</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-center">Tipo de Movimentação</th>
+                            <th scope="col" class="text-center">Data/Hora de Início</th>
+                            <th scope="col" class="text-center">Data/Hora de Fim</th>
+                        </tr>
+                    </thead>
+                    <tbody id="movimentacoesTableBody">
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts {
+    <script>
+        var model = @Html.Raw(Json.Serialize(Model));
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap5.min.js"></script>
+    <script src="~/js/relatorio.js"></script>
+
+
+}
+
+

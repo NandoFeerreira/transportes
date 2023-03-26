@@ -1,0 +1,108 @@
+﻿#movimentacoes-table {
+    width: 100%;
+}
+
+    #movimentacoes-table th,
+    #movimentacoes-table td {
+        width: auto;
+    }
+
+.dataTables_wrapper table {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.dataTables_wrapper th, .dataTables_wrapper td {
+    text-align: center;
+}
+
+.dataTables_wrapper .dataTables_scrollHead th {
+    text-align: center;
+}
+
+.dataTables_wrapper .dataTables_scrollHead .centered {
+    text-align: center;
+}
+
+.dataTables_wrapper th {
+    text-align: center;
+}
+
+form {
+    display: flex;    
+    align-items: center;
+    justify-content: center;
+    margin: 30px auto;
+}
+
+    form label {
+       
+    }
+
+    form strong {
+        display: block;
+        margin-bottom: 5px;
+        text-align: center;
+    }
+
+    form input[type="submit"] {
+        margin-top: 20px;
+        padding: 10px;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+    }
+
+        form input[type="submit"]:hover {
+            background-color: #0062cc;
+        }
+
+select, input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+}
+
+.filters-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+}
+
+    .filter-group label {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .filter-group select {
+        width: 200px;
+        height: 30px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding: 5px;
+    }
+
+.title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+    .title-container h1 {
+        font-weight: bold;
+        font-size: 24px;
+    }
+
+button[type="submit"] {
+    margin: 0 auto;
+    display: block;
+}

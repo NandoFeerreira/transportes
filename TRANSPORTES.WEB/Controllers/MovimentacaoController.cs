@@ -125,5 +125,25 @@ namespace TRANSPORTES.WEB.Controllers
                 throw;
             }
         }
+
+        [HttpGet]
+        [Route("movimentacao/relatorio")]
+        public IActionResult Relatorio()
+        {
+            try
+            
+            {
+                var viewModel = _movimentacaoFactory.GetAllMovimentacoes();
+
+                return View(viewModel);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
     }
 }

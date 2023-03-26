@@ -17,26 +17,7 @@ html {
   min-height: 100%;
 }
 
-body {
-    
-    margin-top: 60px;
-}
 
-.dropdown-menu-custom {
-    min-width: 100%;
-    max-width: 100%;
-    width: 100%;
-}
-
-footer {
-    text-align: center;
-    background: url("bg.jpg");
-    padding: 10px 0;
-}
-
-main {
-    min-height: calc(100vh - 130px); 
-}
 
 
 
