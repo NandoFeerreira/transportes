@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
 using TRANSPORTES.WEB.Factorys.Interfaces;
 using TRANSPORTES.WEB.ViewModels;
 
@@ -21,7 +22,20 @@ namespace TRANSPORTES.WEB.Controllers
         [Route("clientes")]
         public IActionResult Index()
         {
-            return View();
+            try
+            {
+                var model = new TransportesViewModel();
+
+                model.Mensagem = null;
+
+                return View(model);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         [HttpPost]
@@ -32,8 +46,17 @@ namespace TRANSPORTES.WEB.Controllers
             {
                 var result = _entidadeClienteFactory.AddConteiner(model);
 
+                if (result)
+                {
+                    model.Mensagem = "Contêiner adicionado com sucesso.";
+                }
+                else
+                {
+                    model.Mensagem = "Erro ao adicionar contêiner.";
+                }
 
-                return View();
+
+                return View(model);
             }
             catch (Exception)
             {
@@ -47,7 +70,7 @@ namespace TRANSPORTES.WEB.Controllers
         {
             try
             {
-                var listmodel = _entidadeClienteFactory.GetListConteiners();                
+                var listmodel = _entidadeClienteFactory.GetListConteiners();
 
                 return View(listmodel);
 
@@ -65,23 +88,33 @@ namespace TRANSPORTES.WEB.Controllers
         {
             try
             {
+                var listmodel = _entidadeClienteFactory.GetListConteiners();
+
                 var result = _entidadeClienteFactory.UpdateConteiner(model);
 
                 if (result == true)
                 {
-                    return RedirectToAction("Editar", new { mensagem = "Contêiner atualizado com sucesso!" });
+                    var modelToUpdate = listmodel.FirstOrDefault(m => m.ConteinerId == model.ConteinerId);
+                    if (modelToUpdate != null)
+                    {
+                        modelToUpdate.Mensagem = "Edições realizadas com sucesso";
+                    }
                 }
                 else
                 {
-                    ViewBag.Mensagem = "Não foi possível atualizar o contêiner. ";
+                    var modelToUpdate = listmodel.FirstOrDefault(m => m.ConteinerId == model.ConteinerId);
+                    if (modelToUpdate != null)
+                    {
+                        modelToUpdate.Mensagem = "Não foi possível realizar a edição verifique os dados colocados ";
+                    }
                 }
 
-                return RedirectToAction("Editar");
+                return View(listmodel);
             }
             catch (Exception)
             {
-                ViewBag.Mensagem = "Ocorreu um erro ao tentar atualizar o contêiner. Tente novamente mais tarde.";
-                return RedirectToAction("Editar");
+                
+                return RedirectToAction("Index");
             }
         }
 
@@ -91,18 +124,17 @@ namespace TRANSPORTES.WEB.Controllers
         {
             try
             {
+                
+
                 var result = _entidadeClienteFactory.DeleteConteiner(model);
 
                 if (result == true)
                 {
-                    return RedirectToAction("Editar", new { mensagem = "Contêiner Excluido Com Sucesso!" });
+                    return RedirectToAction("Editar");
                 }
-                else
-                {
-                    ViewBag.Mensagem = "Não foi possível excluir o contêiner. ";
-                }
+               
 
-                return RedirectToAction("Editar");
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception)
             {
@@ -110,8 +142,8 @@ namespace TRANSPORTES.WEB.Controllers
                 throw;
             }
 
-            
+
         }
     }
-    
+
 }

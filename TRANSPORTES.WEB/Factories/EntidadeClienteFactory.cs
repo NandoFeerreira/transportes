@@ -163,12 +163,14 @@ namespace TRANSPORTES.WEB.Factorys
 
             var listaModel = new List<TransportesViewModel>();
 
-            var model = new TransportesViewModel();
+          
 
             var clientes = _entidadeClienteRepository.GetAllEntidadeClientes();
 
             foreach (var conteiner in conteiners)
             {
+
+                var model = new TransportesViewModel();
 
                 model.ConteinerId = conteiner.ConteinerId;
                 model.ClienteId = conteiner.ClienteId;

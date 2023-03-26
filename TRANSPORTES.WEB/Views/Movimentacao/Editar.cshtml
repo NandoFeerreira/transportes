@@ -1,6 +1,17 @@
 ﻿@model List<TransportesViewModel>
 
-
+@if (Model != null && Model.Any())
+{
+    foreach (var item in Model)
+    {
+        if (!string.IsNullOrEmpty(item.Mensagem))
+        {
+            <div class="alert alert-success" role="alert">
+                @item.Mensagem
+            </div>
+        }
+    }
+}
 
 <div class="text-center">
     <h3>Adicionar Movimentação</h3>
@@ -13,7 +24,7 @@
         <div class="form-row">
             <div class="form-group col-md-8 mx-auto">
                 <label for="select-cliente">Cliente:</label>
-                <select class="form-control" id="select-cliente" name="ClienteNome">
+                <select class="form-control" id="select-cliente" name="ClienteNome" required>
                     <option value="">Selecione o Cliente</option>
                     @foreach (var cliente in Model)
                     {
@@ -57,14 +68,14 @@
         </div>
         <div class="form-group col-md-8 mx-auto">
             <label for="select-tipo-movimentacao">Tipo Movimentações do Cliente:</label>
-            <select class="form-control" id="select-tipo-movimentacao2" name="MovimentacaoTipo">
+            <select class="form-control" id="select-tipo-movimentacao2" name="MovimentacaoTipo" required>
                 <option value="">Selecione</option>
             </select>
         </div>
         <div class="form-row">
             <div class="form-group col-md-8 mx-auto">
                 <label for="select-tipo-movimentacao">Tipo de Movimentação:</label>
-                <select class="form-control" id="select-tipo-movimentacao" name="Movimentacao.TipoMovimentacao">
+                <select class="form-control" id="select-tipo-movimentacao" name="Movimentacao.TipoMovimentacao" required>
                     <option value="">Selecione o Tipo de Movimentação</option>
                     <option value="embarque">Embarque</option>
                     <option value="descarga">Descarga</option>
@@ -78,19 +89,19 @@
             <div class="form-group row ">
                 <div class="col-md-4 " style="margin-left: 17%">
                     <label for="input-data-hora-inicio">Data e Hora do Início:</label>
-                    <input type="datetime-local" class="form-control" id="input-data-hora-inicio" name="Movimentacao.DataHoraInicio">
+                    <input type="datetime-local" class="form-control" id="input-data-hora-inicio" name="Movimentacao.DataHoraInicio" required>
                 </div>
 
                 <div class="col-md-4 ">
                     <label for="input-data-hora-fim">Data e Hora do Fim:</label>
-                    <input type="datetime-local" class="form-control" id="input-data-hora-fim" name="Movimentacao.DataHoraFim">
+                    <input type="datetime-local" class="form-control" id="input-data-hora-fim" name="Movimentacao.DataHoraFim" required>
                 </div>
             </div>
         </div>
         <div class="form-group">
             <div class="text-center">
-                <button type="submit" class="btn btn-success mt-2">Editar Movimentação</button>
-                <button type="submit" class="btn btn-danger mt-2" formaction="/movimentacao/excluir">Excluir Movimentação</button>
+                <button type="submit" class="btn btn-success mt-2" id="btn-editar-movimentacao">Editar Movimentação</button>
+                <button type="submit" class="btn btn-danger mt-2" formaction="/movimentacao/excluir" id="btn-excluir-movimentacao">Excluir Movimentação</button>
             </div>
         </div>
     </form>

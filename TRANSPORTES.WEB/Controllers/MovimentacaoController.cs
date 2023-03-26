@@ -40,24 +40,33 @@ namespace TRANSPORTES.WEB.Controllers
         {
             try
             {
+                var listmodel = _entidadeClienteFactory.GetListConteiners();
+
                 var result = _movimentacaoFactory.AddMovimentacao(model);
 
-                if (result)
+                if (result == true)
                 {
-                    ViewBag.Message = "Movimentação adicionada com sucesso!";
-                    return RedirectToAction("Index", "Movimentacao");
+                    var modelToUpdate = listmodel.FirstOrDefault(m => m.ConteinerId == model.ConteinerId);
+                    if (modelToUpdate != null)
+                    {
+                        modelToUpdate.Mensagem = "Movimentação adiconada com sucesso";
+                    }
                 }
                 else
                 {
-                    ViewBag.Message = "Não foi possível adicionar a movimentação.";
+                    var modelToUpdate = listmodel.FirstOrDefault(m => m.ConteinerId == model.ConteinerId);
+                    if (modelToUpdate != null)
+                    {
+                        modelToUpdate.Mensagem = "Não foi possível realizar a adição da movimentação verifique os dados colocados ";
+                    }
                 }
+
+                return View(listmodel);
             }
             catch (Exception)
             {
-                ViewBag.Message = "Ocorreu um erro ao adicionar a movimentação.";
+                throw;
             }
-
-            return View();
         }
 
 
@@ -84,18 +93,28 @@ namespace TRANSPORTES.WEB.Controllers
         {
             try
             {
+                var viewModel = _movimentacaoFactory.GetAllMovimentacoes();
+
                 var result = _movimentacaoFactory.UpdateMovimentacao(model);
 
                 if (result == true)
                 {
-                    return RedirectToAction("Editar", "Movimentacao");
+                    var modelToUpdate = viewModel.FirstOrDefault(m => m.ConteinerId == model.ConteinerId);
+                    if (modelToUpdate != null)
+                    {
+                        modelToUpdate.Mensagem = "Edições realizadas com sucesso";
+                    }
                 }
                 else
                 {
-                    
+                    var modelToUpdate = viewModel.FirstOrDefault(m => m.ConteinerId == model.ConteinerId);
+                    if (modelToUpdate != null)
+                    {
+                        modelToUpdate.Mensagem = "Não foi possível realizar a edição verifique os dados colocados ";
+                    }
                 }
 
-                return View();
+                return View(viewModel);
             }
             catch (Exception)
             {

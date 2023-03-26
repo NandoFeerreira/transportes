@@ -29,5 +29,7 @@ namespace TRANSPORTES.WEB.ViewModels
         public List<MovimentacaoViewModel> Movimentacoes { get; set; }
         public MovimentacaoViewModel Movimentacao { get; set; }
 
+        public string Mensagem { get; set; }
+
     }
 }

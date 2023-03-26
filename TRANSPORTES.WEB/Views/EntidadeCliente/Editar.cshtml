@@ -1,11 +1,23 @@
 ﻿@model List<TransportesViewModel>
 
 
- 
-<div class="text-center">
-    <h3>Editar Conteiner</h3>
-</div>
+
 <body>
+    @if (Model != null && Model.Any())
+    {
+        foreach (var item in Model)
+        {
+            if (!string.IsNullOrEmpty(item.Mensagem))
+            {
+                <div class="alert alert-success" role="alert">
+                    @item.Mensagem
+                </div>
+            }
+        }
+    }
+    <div class="text-center">
+        <h3>Editar Conteiner</h3>
+    </div>
     <form class="mx-auto" method="POST" action="/clientes/editar">
         <div class="form-row">
             <div class="form-group col-md-8 mx-auto">
@@ -22,14 +34,14 @@
                 <label for="nome-cliente">Editar Cliente:</label>
                 <div class="input-group">
                     <input type="text" class="form-control" id="nome-cliente" name="NomeClienteAtualiado">
-                    <input type="text" class="form-control" id="id-cliente" name="ClienteId" hidden >
+                    <input type="text" class="form-control" id="id-cliente" name="ClienteId" hidden>
                 </div>
             </div>
             <div class="form-group col-md-8 mx-auto">
                 <label for="conteiner-numero">Nº do Container:</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" id="conteiner-numero" name="NumeroConteiner" >
-                    <input type="text" class="form-control" id="id-conteiner" name="ConteinerId" hidden >
+                    <input type="text" class="form-control" id="conteiner-numero" name="NumeroConteiner">
+                    <input type="text" class="form-control" id="id-conteiner" name="ConteinerId" hidden>
                 </div>
             </div>
             <div class="form-group col-md-8 mx-auto">
@@ -62,7 +74,8 @@
         <div class="form-group">
             <div class="text-center">
                 <button type="submit" class="btn btn-success mt-2">Editar Contêiner</button>
-                <button type="submit" class="btn btn-danger mt-2" formaction="/clientes/excluir" >Excluir Contêiner</button>
+                <button type="submit" class="btn btn-danger mt-2" formaction="/clientes/excluir" onclick="return validarExclusao();">Excluir Contêiner</button>
+
             </div>
         </div>
     </form>
@@ -71,5 +84,5 @@
     </script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="~/js/editar-conteiner.js" ></script>
+    <script src="~/js/editar-conteiner.js"></script>
 </body>

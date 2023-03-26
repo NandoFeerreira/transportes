@@ -3,11 +3,17 @@
 
 
 <div class="text-center">
-    @if (ViewBag.Message != null)
+    @if (Model != null && Model.Any())
     {
-        <div class="alert alert-success" role="alert">
-            @ViewBag.Message
-        </div>
+        foreach (var item in Model)
+        {
+            if (!string.IsNullOrEmpty(item.Mensagem))
+            {
+                <div class="alert alert-success" role="alert">
+                    @item.Mensagem
+                </div>
+            }
+        }
     }
     <h3>Adicionar Movimentação</h3>
 </div>
@@ -89,7 +95,8 @@
         </div>
         <div class="form-group">
             <div class="text-center">
-                <button type="submit" class="btn btn-success mt-2">Adicionar Movimentação</button>               
+                <button type="submit" id="btn-adicionar-movimentacao" class="btn btn-success mt-2">Adicionar Movimentação</button>
+
             </div>
         </div>
     </form>

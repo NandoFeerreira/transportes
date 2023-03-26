@@ -62,4 +62,30 @@
     });
 
 
+    $('#btn-editar-movimentacao').click(function (e) {
+        var dataHoraInicio = $('#input-data-hora-inicio').val();
+        var dataHoraFim = $('#input-data-hora-fim').val();
+
+        if (dataHoraInicio >= dataHoraFim) {
+            e.preventDefault();
+            alert('A data e hora de fim deve ser maior que a data e hora de início.');
+        }
+    });
+
+    $('#btn-excluir-movimentacao').prop('disabled', true);
+
+    $('input, select').on('change', function () {
+        var empty = false;
+        $('input, select').each(function () {
+            if ($(this).val() == '') {
+                empty = true;
+            }
+        });
+        if (empty) {
+            $('#btn-excluir-movimentacao').prop('disabled', true);
+        } else {
+            $('#btn-excluir-movimentacao').prop('disabled', false);
+        }
+    });
+
 });
