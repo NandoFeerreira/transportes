@@ -28,7 +28,7 @@ $(document).ready(function () {
             url: config.language
         },
         processing: false,
-        searching: false,           
+        searching: false,
         pageLength: config.resultadoPorPagina,
         lengthMenu: config.entrada,
         ordering: false,
@@ -62,4 +62,26 @@ $(document).ready(function () {
     });
 
     
+
+    $('#cliente, #tipo').on('change', function () {
+        var clienteSelecionado = $('#cliente').val();
+        var tipoSelecionado = $('#tipo').val();
+
+        $('#movimentacoes-table tbody tr').each(function () {
+            var conteinerId = $(this).data('container-id');
+            var movimentacoes = $(this).find('[data-movimentacao]');
+            var mostrarLinha = false;
+
+            if ((clienteSelecionado === '' || $(this).hasClass(clienteSelecionado)) &&
+                (tipoSelecionado === '' || movimentacoes.filter('[data-movimentacao="' + tipoSelecionado + '"]').length > 0)) {
+                mostrarLinha = true;
+            }
+
+            $(this).toggle(mostrarLinha);
+        });
+    });
+
 });
+
+
+

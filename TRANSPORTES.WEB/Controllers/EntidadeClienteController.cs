@@ -97,6 +97,7 @@ namespace TRANSPORTES.WEB.Controllers
                     var modelToUpdate = listmodel.FirstOrDefault(m => m.ConteinerId == model.ConteinerId);
                     if (modelToUpdate != null)
                     {
+                        ViewBag.ReloadPage = true;
                         modelToUpdate.Mensagem = "Edições realizadas com sucesso";
                     }
                 }
@@ -108,6 +109,9 @@ namespace TRANSPORTES.WEB.Controllers
                         modelToUpdate.Mensagem = "Não foi possível realizar a edição verifique os dados colocados ";
                     }
                 }
+
+
+
 
                 return View(listmodel);
             }
@@ -130,6 +134,7 @@ namespace TRANSPORTES.WEB.Controllers
 
                 if (result == true)
                 {
+                    ViewBag.ReloadPage = true;
                     return RedirectToAction("Editar");
                 }
                

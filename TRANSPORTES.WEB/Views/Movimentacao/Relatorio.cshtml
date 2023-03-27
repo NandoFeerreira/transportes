@@ -7,25 +7,31 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 }
 
+@{
+    int totalImportacao = 0;
+    int totalExportacao = 0;
+}
+
+
 <form class="row g-3">
 
     <strong><h3>Relatório de Movimentações</h3></strong></>
 
     <div class="col-md-6">
-        <label for="tipo" class="form-label text-center">Tipo:</label>
+        <label for="tipo" class="form-label text-center"><strong>Filtro de tipos de movimentações:</strong></label>
         <select id="tipo" name="tipo" class="form-select">
             <option value="">Todos</option>
             <option value="embarque">Embarque</option>
             <option value="descarga">Descarga</option>
-            <option value="gatein">Gate In</option>
-            <option value="gateout">Gate Out</option>
+            <option value="gate-in">Gate In</option>
+            <option value="gate-out">Gate Out</option>
             <option value="reposicionamento">Reposicionamento</option>
             <option value="pesagem">Pesagem</option>
             <option value="scanner">Scanner</option>
         </select>
     </div>
     <div class="col-md-6">
-        <label for="cliente" class="form-label text-center">Cliente:</label>
+        <label for="cliente" class="form-label text-center"><strong>Filtro Cliente</strong></label>
         <select id="cliente" name="cliente" class="form-select">
             <option value="">Todos</option>
             @foreach (var c in Model.Select(m => m.ClienteNome).Distinct().OrderBy(c => c))
@@ -34,9 +40,47 @@
             }
         </select>
     </div>
-    <div class="col-md-12">
-        <button type="submit" class="btn btn-primary">Filtrar</button>
+    @foreach (var categoria in Model)
+    {
+        if (categoria != null && categoria.Movimentacoes != null)
+        {           
+
+            foreach (var movimentacao in categoria.Movimentacoes)
+            {
+                if (movimentacao != null)
+                {
+                    if (categoria.Categoria == "Importação" && movimentacao.ConteinerIdMovimentacao == categoria.ConteinerId)
+                    {
+                        totalImportacao++;
+                    }
+                    else if (categoria.Categoria == "Exportação" && movimentacao.ConteinerIdMovimentacao == categoria.ConteinerId)
+                    {
+                        totalExportacao++;
+                    }
+                }
+            }          
+            
+        }
+    }
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Total de Importações:</h5>
+                    <p class="card-text">@totalImportacao</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Total de Exportações:</h5>
+                    <p class="card-text">@totalExportacao</p>
+                </div>
+            </div>
+        </div>
     </div>
+   
 </form>
 <div class="table-responsive">
     <table id="movimentacoes-table">
@@ -50,10 +94,12 @@
                 <th scope="col" class="text-center">Movimentações</th>
             </tr>
         </thead>
-        <tbody>
+       
+        <tbody id="tabela-movimentacoes">
+            >
             @foreach (var item in Model)
             {
-                <tr>
+                <tr data-container-id="@item.ConteinerId" class="@item.ClienteNome">
                     <td scope="row" class="text-center">@item.ClienteNome</td>
                     <td class="text-center">@item.Tipo</td>
                     <td class="text-center">@item.Categoria</td>
@@ -66,17 +112,15 @@
                                 if (movimentacao.ConteinerIdMovimentacao == item.ConteinerId)
                                 {
                                     contador++;
+                                    <span data-movimentacao="@movimentacao.TipoMovimentacao"></span>
                                 }
                             }
                             @contador
                         }
                     </td>
                     <td class="text-center">
-                        <i class="fas fa-info-circle" data-container-id="@item.ConteinerId">
-
-                        </i>
+                        <i class="fas fa-info-circle" data-container-id="@item.ConteinerId"></i>
                     </td>
-
                 </tr>
 
 
@@ -138,7 +182,6 @@
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap5.min.js"></script>
     <script src="~/js/relatorio.js"></script>
-
 
 }
 

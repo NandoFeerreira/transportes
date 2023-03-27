@@ -61,6 +61,11 @@ namespace TRANSPORTES.WEB.Controllers
                     }
                 }
 
+                foreach (var movimentacao in listmodel)
+                {
+                    movimentacao.Movimentacao = new MovimentacaoViewModel();
+                }
+
                 return View(listmodel);
             }
             catch (Exception)
@@ -112,7 +117,7 @@ namespace TRANSPORTES.WEB.Controllers
                     {
                         modelToUpdate.Mensagem = "Não foi possível realizar a edição verifique os dados colocados ";
                     }
-                }
+                }               
 
                 return View(viewModel);
             }
@@ -134,6 +139,7 @@ namespace TRANSPORTES.WEB.Controllers
 
                 if(result == true) 
                 {
+                    ViewBag.ReloadPage = true;
                     return RedirectToAction("Editar", "Movimentacao");
                 };
 
