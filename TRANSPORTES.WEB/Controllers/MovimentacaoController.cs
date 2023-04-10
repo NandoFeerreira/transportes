@@ -155,9 +155,9 @@ namespace TRANSPORTES.WEB.Controllers
         [Route("movimentacao/relatorio")]
         public IActionResult Relatorio()
         {
-            try
-            
+            try            
             {
+
                 var viewModel = _movimentacaoFactory.GetAllMovimentacoes();
 
                 return View(viewModel);

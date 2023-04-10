@@ -53,8 +53,8 @@ $(document).ready(function () {
         movimentacoes.forEach(m => {
             let tr = $('<tr>');
             tr.append($('<td>').addClass('text-center').text(m.tipoMovimentacao));
-            tr.append($('<td>').addClass('text-center').text(new Date(m.dataHoraInicio).toLocaleString('pt-BR').split(',')[0]));
-            tr.append($('<td>').addClass('text-center').text(new Date(m.dataHoraInicio).toLocaleString('pt-BR').split(',')[1]));
+            tr.append($('<td>').addClass('text-center').text(new Date(m.dataHoraInicio).toLocaleString('pt-BR')));
+            tr.append($('<td>').addClass('text-center').text(new Date(m.dataHoraFim).toLocaleString('pt-BR')));
             tbody.append(tr);
         });
 
